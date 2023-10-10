@@ -4,7 +4,9 @@
   <img src="ui/F1.png">
 </p>
 <h2>Installation </h2>
-! You can also use <dtrong>Google Collab</strong> to check out our results without any installation! <a href="https://colab.research.google.com/github/NUBIVlab/HyperColorization/blob/master/demo.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>!
+! You can also use <dtrong>Google Collab</strong> to check out our results without any installation! <br>
+  Demo:<a href="https://colab.research.google.com/github/NUBIVlab/HyperColorization/blob/master/demo.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a><br>
+  Demo for figures: <a href="https://colab.research.google.com/github/NUBIVlab/HyperColorization/blob/master/demo_for_figures.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a><br>
   
 * Clone this repository to your local machine. Example local path: ../dev/HyperColorization/
 * Install [Anaconda]( https://www.anaconda.com/):
