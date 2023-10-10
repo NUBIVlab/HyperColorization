@@ -158,11 +158,13 @@ archive/
 .vscode/
 aux_funcs/garbage.py
 SASSI/
-results/
+results/*
 
 # Some files in the ignored folders:
 !ui/README.md
 !ui/F1.png
+!results/graphs/
+!results/sampling_patterns/
 !data/README.md
 !data/analysis_output.pickle
 !data/analysis2_output.npy
