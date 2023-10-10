@@ -205,7 +205,7 @@ def get_guided_pushbroom(gray_img:np.ndarray, sampling_ratio: float, bin_count:i
     mask[rows.astype(np.int32), :] = 1
     return mask
 
-def testPatternsPushbroom(colorizer:clr.GlobalColorizer, hpim:np.ndarray, gray_img:np.ndarray, lams:np.ndarray, sampling_ratio:float, metrics:dict, metric:str, bin_count:int = 16, optional_weight:float = 0, draw_method = '1931') -> None:
+def testPatternsPushbroom(colorizer:clr.GlobalColorizer, hpim:np.ndarray, gray_img:np.ndarray, lams:np.ndarray, sampling_ratio:float, metrics:dict, metric:str, bin_count:int = 16, optional_weight:float = 0, draw_method = '1931', save=None) -> None:
     """
     Used for comparing different pushbroom sampling patterns.
     colorizer: colorizer object
@@ -238,7 +238,7 @@ def testPatternsPushbroom(colorizer:clr.GlobalColorizer, hpim:np.ndarray, gray_i
     guided_sample_cnt = np.sum(mask)
     colorizer.__init__(gray_img, mask*hpim, lams=lams, draw_method=draw_method)
     colorizer.hyperColorize(draw_result=True)
-    colorizer.plot_spectral_clue_result(save_figure='results/sampling_patterns/guided_pb.png', brightness_boost=1.5)
+    colorizer.plot_spectral_clue_result(save_figure=save, brightness_boost=1.5)
     guided_score = metrics[metric](hpim, colorizer.get_result())
     print(metric+':\t\t\t\t'+'Sample Count'+':\nuni: ' + str(np.round(uniform_score, 5))+'\t\t\t'+
           str(uni_sample_cnt.astype(np.int32))+ '\nrnd: '+ str(np.round(random_score,5))+'\t\t\t'+
@@ -246,7 +246,7 @@ def testPatternsPushbroom(colorizer:clr.GlobalColorizer, hpim:np.ndarray, gray_i
           str(guided_sample_cnt.astype(np.int32)))
     
 
-def testPatternsWhiskbroom(colorizer:clr.GlobalColorizer, hpim:np.ndarray, gray_img:np.ndarray, lams:np.ndarray, sampling_ratio:float, metrics:dict, metric:str, bin_count:int = 64, optional_weight:float = 0.5, draw_method = '1931') -> None:
+def testPatternsWhiskbroom(colorizer:clr.GlobalColorizer, hpim:np.ndarray, gray_img:np.ndarray, lams:np.ndarray, sampling_ratio:float, metrics:dict, metric:str, bin_count:int = 64, optional_weight:float = 0.5, draw_method = '1931', save=None) -> None:
     """
     Used for comparing different whiskbroom sampling patterns.
     colorizer: colorizer object
@@ -279,7 +279,7 @@ def testPatternsWhiskbroom(colorizer:clr.GlobalColorizer, hpim:np.ndarray, gray_
     guided_sample_cnt = np.sum(mask)
     colorizer.__init__(gray_img, mask*hpim, lams=lams, draw_method=draw_method)
     colorizer.hyperColorize(draw_result=True)
-    colorizer.plot_spectral_clue_result(save_figure='results/sampling_patterns/guided_wb.png', convolve=np.ones((2,2)))
+    colorizer.plot_spectral_clue_result(save_figure=save, convolve=np.ones((2,2)))
     guided_score = metrics[metric](hpim, colorizer.get_result())
     print(metric+':\t\t\t\t'+'Sample Count'+':\nuni: ' + str(np.round(uniform_score, 5))+'\t\t\t'+
           str(uni_sample_cnt.astype(np.int32))+ '\nrnd: '+ str(np.round(random_score,5))+'\t\t\t'+
