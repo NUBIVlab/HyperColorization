@@ -167,6 +167,7 @@ results/*
 !results/sampling_patterns/
 !data/README.md
 !data/analysis_output.pickle
+!data/analysis2_output.pickle
 !data/analysis2_output.npy
 !data/CIEXYZ_1931_table.npy
 !data/spectral_basis_data_400-10-700.npy
