@@ -175,7 +175,6 @@ def drawSpectralBasis(spec:SpectralDim, lams:np.ndarray, invert: list() = [1, 1,
         for j in np.linspace(l,h,50):
             color = np.clip(np.tile(np.reshape(spec.basis[:,i], (31, 1, 1)) * j, (1, 3, 20)), 0, np.inf)
             a = vis.draw_hpim(color, draw = False, lams = lams, method = '1931', normalize=False)
-            a = np.clip(a, 0, 1)
             base = np.concatenate((base, a), axis=0)
         base = base[3:, :, :]
         ax = plt.subplot2grid((3, 16), (i//2, i%2*8+5), colspan=2, rowspan=1)
