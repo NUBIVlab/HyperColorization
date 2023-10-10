@@ -219,26 +219,34 @@ def testPatternsPushbroom(colorizer:clr.GlobalColorizer, hpim:np.ndarray, gray_i
     optional_weight: weight based on corner detection
     """
     l,h,w = hpim.shape
+    if save is not None:
+        save1 = save + 'uni_pb.png'
+        save2 = save + 'rnd_pb.png'
+        save3 = save + 'gdd_pb.png'
+    else:
+        save1 = None
+        save2 = None
+        save3 = None
     #uniform init
     mask = get_uniform_pushbroom(h,w,sampling_ratio)
     uni_sample_cnt = np.sum(mask)
     colorizer.__init__(gray_img, mask*hpim, lams=lams, draw_method=draw_method)
     colorizer.hyperColorize(draw_result=True)
-    colorizer.plot_spectral_clue_result(save_figure='results/sampling_patterns/uniform_pb.png', brightness_boost=1.5)
+    colorizer.plot_spectral_clue_result(save_figure=save1, brightness_boost=1.5)
     uniform_score = metrics[metric](hpim, colorizer.get_result())
     #random init
     mask = get_random_pushbroom(h,w,sampling_ratio)
     rnd_sample_cnt = np.sum(mask)
     colorizer.__init__(gray_img, mask*hpim, lams=lams, draw_method=draw_method)
     colorizer.hyperColorize(draw_result=True)
-    colorizer.plot_spectral_clue_result(save_figure='results/sampling_patterns/random_pb.png', brightness_boost=1.5)
+    colorizer.plot_spectral_clue_result(save_figure=save2, brightness_boost=1.5)
     random_score = metrics[metric](hpim, colorizer.get_result())
     #guided init
     mask = get_guided_pushbroom(np.squeeze(gray_img/np.max(gray_img)), sampling_ratio, bin_count=bin_count, optional_weight=optional_weight)
     guided_sample_cnt = np.sum(mask)
     colorizer.__init__(gray_img, mask*hpim, lams=lams, draw_method=draw_method)
     colorizer.hyperColorize(draw_result=True)
-    colorizer.plot_spectral_clue_result(save_figure=save, brightness_boost=1.5)
+    colorizer.plot_spectral_clue_result(save_figure=save3, brightness_boost=1.5)
     guided_score = metrics[metric](hpim, colorizer.get_result())
     print(metric+':\t\t\t\t'+'Sample Count'+':\nuni: ' + str(np.round(uniform_score, 5))+'\t\t\t'+
           str(uni_sample_cnt.astype(np.int32))+ '\nrnd: '+ str(np.round(random_score,5))+'\t\t\t'+
@@ -260,26 +268,34 @@ def testPatternsWhiskbroom(colorizer:clr.GlobalColorizer, hpim:np.ndarray, gray_
     optional_weight: weight based on corner detection
     """
     l,h,w = hpim.shape
+    if save is not None:
+        save1 = save + 'uni_wb.png'
+        save2 = save + 'rnd_wb.png'
+        save3 = save + 'gdd_wb.png'
+    else:
+        save1 = None
+        save2 = None
+        save3 = None
     #uniform init
     mask = get_uniform_sampling_pattern(h,w,sampling_ratio)
     uni_sample_cnt = np.sum(mask)
     colorizer.__init__(gray_img, mask*hpim, lams=lams, draw_method=draw_method)
     colorizer.hyperColorize(draw_result=True)
-    colorizer.plot_spectral_clue_result(save_figure='results/sampling_patterns/uniform_wb.png', convolve=np.ones((2,2)))
+    colorizer.plot_spectral_clue_result(save_figure=save1, convolve=np.ones((2,2)))
     uniform_score = metrics[metric](hpim, colorizer.get_result())
     #random init
     mask = get_random_sampling_pattern(h,w,uni_sample_cnt)
     rnd_sample_cnt = np.sum(mask)
     colorizer.__init__(gray_img, mask*hpim, lams=lams, draw_method=draw_method)
     colorizer.hyperColorize(draw_result=True)
-    colorizer.plot_spectral_clue_result(save_figure='results/sampling_patterns/random_wb.png', convolve=np.ones((2,2)))
+    colorizer.plot_spectral_clue_result(save_figure=save2, convolve=np.ones((2,2)))
     random_score = metrics[metric](hpim, colorizer.get_result())
     #guided init
     mask = get_guided_sampling_pattern(np.squeeze(gray_img), sampling_ratio, bin_count=bin_count, optional_weight = optional_weight)
     guided_sample_cnt = np.sum(mask)
     colorizer.__init__(gray_img, mask*hpim, lams=lams, draw_method=draw_method)
     colorizer.hyperColorize(draw_result=True)
-    colorizer.plot_spectral_clue_result(save_figure=save, convolve=np.ones((2,2)))
+    colorizer.plot_spectral_clue_result(save_figure=save3, convolve=np.ones((2,2)))
     guided_score = metrics[metric](hpim, colorizer.get_result())
     print(metric+':\t\t\t\t'+'Sample Count'+':\nuni: ' + str(np.round(uniform_score, 5))+'\t\t\t'+
           str(uni_sample_cnt.astype(np.int32))+ '\nrnd: '+ str(np.round(random_score,5))+'\t\t\t'+
