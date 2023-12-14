@@ -26,5 +26,8 @@
   > Unfortunately, it's a problem with the data. If you are too annoyed, the best fix is to remove a couple of columns from the left and a couple of rows from the bottom after importing.
 
 * Can I run this on my pre-existing environment?
-  > Probably yes, but you might have version conflicts. Other than numpy, scipy, matplotlib, scikit-image opencv, and tqdm (which are probably already installed in most image processing-related environments), you will need kneed and openexr (openexr is optional, you can comment it out, but you won't be able to open the Kaist dataset). 
+  > Probably yes, but you might have version conflicts. Other than numpy, scipy, matplotlib, scikit-image opencv, and tqdm (which are probably already installed in most image processing-related environments), you will need kneed and openexr (openexr is optional, you can comment it out, but you won't be able to open the Kaist dataset).
+
+* How do I learn a spectral basis for my dataset?
+  > If you have a big dataset, you need to have a lot of RAM or downsample your images. Unroll your dataset to have shape CxN where C are spectral vectors and N is the number of pixels. Then, call LearnSpectralBasisDB function of the SpectralDim class. You can create unrolled versions of existing datasets by calling load_CAVE_db or load_Harvard_db inside the importer class.
   
